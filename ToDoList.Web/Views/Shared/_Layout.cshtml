@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                @if (!Request.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Login", "Login", "Account", "", new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Create Account", "CreateAccount", "Account", "", new { @class = "nav-link" })
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("ToDo Items", "Index", "ToDoList", "", new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Statistics", "Statistics", "ToDoList", "", new { @class = "nav-link" })
+                    </li>
+                }
+            </ul>
+            <ul class="navbar-nav logout">
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="nav-item nav-link">
+                        (@User.Identity.Name)
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Logout", "Logout", "Account", "", new { @class = "nav-link" })
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

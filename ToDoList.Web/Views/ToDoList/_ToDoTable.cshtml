@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ToDoList.BLL.ViewModels.TodoItemVM>
+
+<table class="table">
+    
+
+    @foreach (var item in Model)
+    {
+        <tr>            
+            <td>
+                @Html.CheckBoxFor(modelItem => item.IsDone, new { id = item.Id, @class = "ActiveCheck" })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.Name, new { htmlAttributes = new { @class = "ChangedName", @id = @item.Id } })
+            </td>            
+            <td class="DeleteButton" id="@item.Id">
+                X
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script src="~/CustomScripts/CheckBoxListener.js"></script>
+<script src="~/CustomScripts/TodoNameListener.js"></script>
+<script src="~/CustomScripts/DeleteButtonListener.js"></script>
